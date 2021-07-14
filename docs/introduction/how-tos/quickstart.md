@@ -23,7 +23,7 @@ deployment/helm-k8s/quickstart_install/dependencies.sh
 1. Go to https://github.com/G-Research/siembol-config
 2. Fork into your own organization or personal account
 
-#### 2. Create Git token
+#### 2. Create GitHub token
 
 1. Go to https://github.com/settings/tokens
 2. Click Generate new token
@@ -61,7 +61,8 @@ You should now see the Siembol UI homepage.
 If you're done poking about on a local instance, you can clean up with:
 
 1. For cleaning up siembol resources and dependencies:
-```bash deployment/helm-k8s/quickstart_install/cleanUp.sh
+```bash 
+deployment/helm-k8s/quickstart_install/cleanUp.sh
 ```
 2. For deleting everything siembol related incl. config maps, secrets, certs and namespace:
 ```bash
