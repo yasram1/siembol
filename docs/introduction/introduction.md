@@ -51,7 +51,7 @@ How Siembol improves upon Metron
 
 ### Easy installation to try out with prepared docker images and helm charts
 
-- Siembol supports deployment on external hadoop clusters to ensure the high performance which we expect at GR. However, we are providing k8s helm charts for all deployment dependencies in order to test siembol in development environments.
+- Siembol supports deployment on external hadoop clusters to ensure the high performance which we expect at GR. However, we are providing k8s helm charts for all deployment dependencies in order to test siembol in development environments. The quickstart guide is [here](https://github.com/G-Research/siembol/blob/master/docs/introduction/how-tos/quickstart.md)
 
 Use-Cases
 ---------

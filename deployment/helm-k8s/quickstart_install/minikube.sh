@@ -48,7 +48,3 @@ spec:
   ca:
     secretName: cacerts
 EOF
-
-
-
-

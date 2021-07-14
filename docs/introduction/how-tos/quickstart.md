@@ -7,78 +7,63 @@ Local Install
 ### 1. Run minikube.sh
 
 ```bash
-deployment/minikube/minikube.sh
+deployment/helm-k8s/quickstart_install/minikube.sh
 ```
 
-### 2. Prepare Siembol Config Repository
-
-#### 1. Fork Siembol Config Repository
-
-1. Go to https://github.com/G-Research/siembol-config
-1. Fork into your own organization or personal account
-
-#### 2. Update application.properties
-
-1. Clone the https://github.com/G-Research/charts repo
-1. Switch to the `siembol` branch: `git checkout stackedsax/siembol`
-2. Edit: `src/siembol/resources/application.properties`
-
-Change <your_github_org_or_username> in these lines: 
-
+### 2. Install dependencies
+#### 1. Run dependencies.sh
+```bash
+deployment/helm-k8s/quickstart_install/dependencies.sh
 ```
-config-editor.services.alert.config-store.git-user-name=<your_github_org_or_username>
-config-editor.services.alert.config-store.store-repository-name=<your_github_org_or_username>/siembol-config
-config-editor.services.alert.config-store.release-repository-name=<your_github_org_or_username>/siembol-config
-```
-
-#### 3. Update git.config
-
-1. Still in the `siembol` repo, edit: `src/siembol/resources/git.config`
-2. Replace "your_username" and "your_email" with the appropriate values
-
 
 ### 3. Prepare git
 
-#### 1. Create Git Secret
+#### 1. Prepare Siembol Config Repository
 
-Generate a token
+1. Go to https://github.com/G-Research/siembol-config
+2. Fork into your own organization or personal account
+
+#### 2. Create Git token
+
 1. Go to https://github.com/settings/tokens
-2. Click Generate Token
+2. Click Generate new token
 4. Select "repo - Full control of private repositories" scope
 5. Hit "Generate token"
-6. Copy token value to a file named `git`
+6. Keep this token value as you will need it for the next step.
 
-#### 2. Generate a secret for your git API Token:
-
-This creates a Kubernetes secret for the Config Editor to interact with git.
+#### 3. Run demoInstall.sh
+1. This will ask for your github details related to the Siembol Config repository and the token created in previous step.
+2. This will also initialise Zookeeper nodes.
 
 ```bash
-kubectl create secret generic siembol-config-editor-rest-secrets --from-file=git -n siembol
+deployment/helm-k8s/quickstart_install/demoInstall.sh
 ```
 
-
-### 4. Helm install
+### 4. Siembol install
 
 To install Siembol in the cluster
 
 ```bash
-helm repo add gresearch https://g-research.github.io/charts
-helm upgrade --install siembol -n siembol charts/src/siembol -f charts/src/siembol/quickstart-values.yaml
+helm install siembol deployment/helm-k8s/ -f deployment/helm-k8s/values.yaml -n=siembol
 ```
 
-This step might take 3-5 minutes depending on the specs of your development machine.
+This step might take a few minutes depending on the specs of your development machine.
 
 ### Check it out!
 
 In a browser, go to:
 
-  * https://ui.siembol.local/home
+  * https://siembol.local/home
 
 You should now see the Siembol UI homepage.
 
 ## Cleaning up
 If you're done poking about on a local instance, you can clean up with:
 
+1. For cleaning up siembol resources and dependencies:
+```bash deployment/helm-k8s/quickstart_install/cleanUp.sh
+```
+2. For deleting everything siembol related incl. config maps, secrets, certs and namespace:
 ```bash
 minikube delete -p siembol
 sudo rm /etc/resolver/minikube-*
