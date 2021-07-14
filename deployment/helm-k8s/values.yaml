@@ -133,3 +133,12 @@ manager:
   ingress:
     enabled: true
     hostname: topology-manager.siembol.local
+  
+  cronjob:
+    name: "clean-lingering-topology-manager-jobs"
+    schedule: "*/15 * * * *" # run every 15 min
+    image:
+      registry: docker.io
+      repository: alpine/k8s
+      tag: "latest"
+      pullPolicy: Always

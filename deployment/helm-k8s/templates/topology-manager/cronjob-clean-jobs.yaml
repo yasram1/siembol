@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.manager.cronjob.name }}
+spec:
+  schedule: {{ .Values.manager.cronjob.schedule }}
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            name: {{ .Values.manager.cronjob.name }}
+        spec:
+          serviceAccountName: {{ include "siembol.manager.serviceaccount.fullname" $ }}
+          containers:
+          - name: hello
+            image: "{{ .Values.manager.cronjob.image.registry }}/{{ .Values.manager.cronjob.image.repository }}"
+            imagePullPolicy: "{{ .Values.manager.cronjob.image.pullPolicy }}
+            command:
+            - /bin/sh
+            - -c
+            - kubectl -n siembol delete jobs --field-selector status.successful=1 -l name={{ include "siembol.manager.appname.fullname" $ }}
+            securityContext:
+              runAsUser: 1000
+          restartPolicy: OnFailure
