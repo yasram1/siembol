@@ -16,7 +16,7 @@ deployment/helm-k8s/quickstart_install/minikube.sh
 deployment/helm-k8s/quickstart_install/dependencies.sh
 ```
 
-### 3. Prepare git
+### 3. Prepare GitHub
 
 #### 1. Prepare Siembol Config Repository
 
