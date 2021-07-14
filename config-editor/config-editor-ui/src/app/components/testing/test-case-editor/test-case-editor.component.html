@@ -1,30 +1,49 @@
+<mat-card-title>
+    <button mat-raised-button title="Test Suite" (click)="onCancelEditing()"><</button>
+    <h2>{{ testCase.test_case_name }} v{{ testCase.version }}</h2>
+    <div>
+        <button mat-icon-button [disabled]="testStoreService.testCaseHistoryService.isHistoryEmpty()" color="primary" title="Undo" (click)="undoTestCase()">
+            <mat-icon>undo</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="testStoreService.testCaseHistoryService.isFutureEmpty()" color="primary" title="Redo" (click)="redoTestCase()">
+            <mat-icon>redo</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" title="Copy Test Case to Clipboard" (click)="onCopyTestCase()">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" title="Paste Test Case from Clipboard" (click)="onPasteTestCase()">
+            <mat-icon>content_paste</mat-icon>
+        </button>
+    </div>
+    <re-test-status-badge [testCaseWrapper]="(editedTestCase$ | async)"></re-test-status-badge>
+</mat-card-title>
 <div class="console">
     <span class="title">
         <h4>
             <mat-icon class="left-icon">computer</mat-icon>Test Output
         </h4>
-        <h4 *ngIf="testCaseWrapper?.testCaseResult?.testResult?.test_result_raw_output" class="output-help">Click the
+        <h4 *ngIf="(editedTestCase$ | async)?.testCaseResult?.testResult?.test_result_raw_output" class="output-help">Click the
             JSON key to copy the absolute JSON path to clipboard</h4>
     </span>
-    <div class="json-tree" *ngIf="testCaseWrapper?.testCaseResult?.testResult?.test_result_raw_output">
-        <re-json-tree [json]="testCaseWrapper.testCaseResult.testResult.test_result_raw_output || {}" [prevKey]="'$'">
+    <div class="json-tree" *ngIf="(editedTestCase$ | async)?.testCaseResult?.testResult?.test_result_raw_output">
+        <re-json-tree [json]="(editedTestCase$ | async).testCaseResult.testResult.test_result_raw_output || {}" [prevKey]="'$'">
         </re-json-tree>
     </div>
     <mat-expansion-panel
-        [expanded]="testCaseWrapper?.testCaseResult?.testResult?.message || testCaseWrapper?.testCaseResult?.testResult?.exception || testCaseWrapper?.testCaseResult?.testResult?.test_result_output">
+        [expanded]="(editedTestCase$ | async)?.testCaseResult?.testResult?.message || (editedTestCase$ | async)?.testCaseResult?.testResult?.exception || (editedTestCase$ | async)?.testCaseResult?.testResult?.test_result_output">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Output Messages
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngIf="testCaseWrapper?.testCaseResult?.testResult?.message">
-            <pre>{{ testCaseWrapper.testCaseResult.testResult.message }}</pre>
+        <div *ngIf="(editedTestCase$ | async)?.testCaseResult?.testResult?.message">
+            <pre>{{ (editedTestCase$ | async).testCaseResult.testResult.message }}</pre>
         </div>
-        <div *ngIf="testCaseWrapper?.testCaseResult?.testResult?.exception">
-            <pre>{{ testCaseWrapper.testCaseResult.testResult.exception }}</pre>
+        <div *ngIf="(editedTestCase$ | async)?.testCaseResult?.testResult?.exception">
+            <pre>{{ (editedTestCase$ | async).testCaseResult.testResult.exception }}</pre>
         </div>
-        <div *ngIf="testCaseWrapper?.testCaseResult?.testResult?.test_result_output">
-            <pre>{{ testCaseWrapper.testCaseResult.testResult.test_result_output }}</pre>
+        <div *ngIf="(editedTestCase$ | async)?.testCaseResult?.testResult?.test_result_output">
+            <pre>{{ (editedTestCase$ | async).testCaseResult.testResult.test_result_output }}</pre>
         </div>
     </mat-expansion-panel>
 </div>
@@ -38,7 +57,7 @@
 </div>
 
 <form [formGroup]="form">
-    <formly-form #formly [model]="testCase" [fields]="fields" [options]="options" [form]="form"></formly-form>
+    <formly-form [model]="testCase" [fields]="[field]" [options]="options" [form]="form"></formly-form>
 </form>
 
 <div mat-dialog-actions class="button-group-end">

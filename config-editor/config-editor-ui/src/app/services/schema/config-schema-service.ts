@@ -4,6 +4,7 @@ import { ConfigData, Config } from '@app/model';
 import { JSONSchema7 } from 'json-schema';
 import * as omitEmpty from 'omit-empty';
 import { SchemaService } from './schema.service';
+import { areJsonEqual } from '@app/commons/helper-functions';
 
 export class ConfigSchemaService extends SchemaService {
   private readonly _schema: JSONSchema7;
@@ -27,11 +28,11 @@ export class ConfigSchemaService extends SchemaService {
     );
   }
 
-  public get schema() {
+  get schema() {
     return this._schema;
   }
 
-  public createDeploymentSchema(): JSONSchema7 {
+  createDeploymentSchema(): JSONSchema7 {
     const depSchema = cloneDeep(this.originalSchema);
     depSchema.properties[this.uiMetadata.deployment.config_array] = {};
     delete depSchema.properties[this.uiMetadata.deployment.config_array];
@@ -47,13 +48,8 @@ export class ConfigSchemaService extends SchemaService {
     return depSchema;
   }
 
-  public cleanConfigData(configData: ConfigData): ConfigData {
-    let cfg = this.produceOrderedJson(configData, '/');
-    cfg = omitEmpty(cfg);
-    return cfg;
-  }
-
-  public cleanConfig(config: Config): Config {
+  cleanConfig(config: Config): Config {
+    config = cloneDeep(config);
     config.configData = this.unwrapConfig(config.configData);
     if (config.isNew) {
       config.configData[this.uiMetadata.name] = config.name;
@@ -68,5 +64,15 @@ export class ConfigSchemaService extends SchemaService {
     config.description = config.configData[this.uiMetadata.description];
     config.configData = this.cleanConfigData(config.configData);
     return config;
+  }
+
+  areTestCasesEqual(config1, config2): boolean {
+    return areJsonEqual(omitEmpty(config1), omitEmpty(config2));
+  }
+
+  private cleanConfigData(configData: ConfigData): ConfigData {
+    let cfg = this.produceOrderedJson(configData, '/');
+    cfg = omitEmpty(cfg);
+    return cfg;
   }
 }
