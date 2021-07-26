@@ -93,23 +93,6 @@ rest:
 # config-editor-ui parameters
 # -----------------------------------------------------------------------------
 
-ui:
-  image: 
-    repository: "gresearchdev/siembol-config-editor-ui"
-    tag: "latest"
-    pullPolicy: Always
-
-  appName: "config-editor-ui"
-  containerPort: 8080
-
-  service:
-    port: 8080
-    intport: 80
-
-  # Run with an ingress
-  ingress:
-    enabled: true
-    hostname: siembol.local
 
 
 # -----------------------------------------------------------------------------
