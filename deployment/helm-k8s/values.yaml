@@ -64,7 +64,7 @@ storm:
     enabled: false
     hostname: storm.local
 
-siembolbase:
+siembol:
   storm:
     ingress:
       enabled: false

@@ -18,7 +18,7 @@ sources:
 - https://github.com/G-Research/siembol/deployment/helm-k8s
 
 dependencies:
-  - name: siembolbase
+  - name: siembol
     version: ~0.1.4
     repository: https://g-research.github.io/charts
 
