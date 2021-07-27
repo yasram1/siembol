@@ -20,7 +20,7 @@ sources:
 dependencies:
   - name: siembolbase
     version: ~0.1.4
-    repository: siembol-0.1.4.tgz
+    repository: https://g-research.github.io/charts
 
 
 replicaCount: 1
