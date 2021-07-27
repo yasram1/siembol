@@ -61,7 +61,7 @@ storm:
       name: storm-ui
       port: 8080
   ingress:
-    enabled: true
+    enabled: false
     hostname: storm.local
 
 
@@ -100,16 +100,16 @@ ui:
     pullPolicy: Always
 
   appName: "config-editor-ui"
-  containerPort: 8080
+  containerPort: 8085
 
   service:
-    port: 8080
-    intport: 80
+    port: 8085
+    intport: 85
 
   # Run with an ingress
   ingress:
     enabled: true
-    hostname: siembol.local.ui.test
+    hostname: siembol.local
 
 
 # -----------------------------------------------------------------------------

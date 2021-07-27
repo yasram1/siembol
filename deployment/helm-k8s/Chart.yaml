@@ -19,8 +19,8 @@ sources:
 
 dependencies:
   - name: siembol
-    version: ~0.1.2
-    repository: https://g-research.github.io/charts
+    version: ~0.1.4
+    repository: siembol-0.1.4.tgz
 
 
 replicaCount: 1
