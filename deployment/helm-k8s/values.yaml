@@ -64,30 +64,23 @@ storm:
     enabled: false
     hostname: storm.local
 
+siembolbase:
+  storm:
+    ingress:
+      enabled: false
+  ui:
+    service:
+      port: 8085
+      intport: 85
 
+    # Run with an ingress
+    ingress:
+      enabled: true
+      hostname: siembol.local
 # -----------------------------------------------------------------------------
 # config-editor-rest parameters
 # -----------------------------------------------------------------------------
 
-rest:
-  image: 
-    repository: "gresearchdev/siembol-config-editor-rest"
-    tag: "latest"
-    pullPolicy: Always
-
-  appName: "config-editor-rest"
-  containerPort: 8081
-  
-  mountPath: "/opt/config-editor-rest"
-
-  configmap:
-    name: "github-details"
-
-  service:
-    port: 8081
-  ingress:
-    enabled: true
-    hostname: rest.siembol.local
 
 # -----------------------------------------------------------------------------
 # config-editor-ui parameters
