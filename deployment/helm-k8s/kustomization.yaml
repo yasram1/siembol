@@ -2,5 +2,5 @@ resources:
   - all.yaml
 namespace: siembol
 patchesStrategicMerge:
-  - ui-deploy-patch.yaml
-  - rest-deploy-patch.yaml
+  - ui_deploy_patch.yaml
+  - rest_deploy_patch.yaml
