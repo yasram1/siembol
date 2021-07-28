@@ -1,7 +1,0 @@
-- op: add
-  path: /spec/ports/-
-  value:
-    name: sslport
-    port: 443
-    targetPort: 80
-    protocol: TCP
