@@ -2,11 +2,5 @@ resources:
   - all.yaml
 namespace: siembol
 patchesStrategicMerge:
-  - templates/ui/add-deploy2.yaml
-# patchesJson6902:
-#   - path: add-ssl-test-port.yaml
-#     target:
-#       kind: Service
-#       name: siembol-config-editor-ui
-#       version: v1
-#       group: ""
+  - ui-deploy-patch.yaml
+  - rest-deploy-patch.yaml
