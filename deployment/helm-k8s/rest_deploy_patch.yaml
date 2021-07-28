@@ -1,24 +1,14 @@
-- |-
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      app: siembol-config-editor-rest 
-    name: siembol-config-editor-rest
-    namespace: siembol
-  spec:
-    replicas: 2
-    selector:
-      matchLabels:
-        app: siembol-config-editor-rest
-    template:
-      metadata:
-        labels:
-          app: siembol-config-editor-rest
-        name: siembol-config-editor-rest
-      spec:
-        containers:
-        - name: siembol-config-editor-rest
-          env:
-          - name: TEST_ADDITIONAL_ENV_VARIABLE
-            value: "WORKS"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: siembol-config-editor-rest
+  namespace: siembol
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: siembol-config-editor-rest
+        env:
+        - name: TEST_ADDITIONAL_ENV_VARIABLE
+          value: "WORKS"

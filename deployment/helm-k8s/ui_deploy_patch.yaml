@@ -1,23 +1,13 @@
-- |-
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      app: siembol-config-editor-ui 
-    name: siembol-config-editor-ui
-    namespace: siembol
-  spec:
-    selector:
-      matchLabels:
-        app: siembol-config-editor-ui
-    template:
-      metadata:
-        labels:
-          app: siembol-config-editor-ui
-        name: siembol-config-editor-ui
-      spec:
-        containers:
-        - name: siembol-config-editor-ui
-          env:
-          - name: TEST_ENV_VARIABLE
-            value: "This-is-working"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: siembol-config-editor-ui
+  namespace: siembol
+spec:
+  template:
+    spec:
+      containers:
+      - name: siembol-config-editor-ui
+        env:
+        - name: TEST_ENV_VARIABLE
+          value: "This-is-working"
