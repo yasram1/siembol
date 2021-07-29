@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: siembol-config-editor-rest
+  namespace: siembol
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: siembol-config-editor-rest
+        appId: 0000
+    spec:
+      containers:
+      - name: siembol-config-editor-rest
+        env:
+        - name: TEST_ADDITIONAL_ENV_VARIABLE
+          value: "WORKS-DEVELOP2"
+        volumeMounts:
+        - name: siembol-config-editor-rest
+          mountPath: /etc/gitconfig
+          subPath: gitconfig
+          readOnly: true
+      volumes:
+      - name: siembol-config-editor-rest
+        emptyDir: {}

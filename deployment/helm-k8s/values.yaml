@@ -68,7 +68,15 @@ storm:
     enabled: true
     fqdn: storm.local
 
-
+siembol:
+  response:
+    enabled: true
+  ui:
+    image:
+      tag: "1.1.1-dev"
+  rest:
+    image:
+      pullPolicy: Never
 # -----------------------------------------------------------------------------
 # config-editor-rest parameters
 # -----------------------------------------------------------------------------

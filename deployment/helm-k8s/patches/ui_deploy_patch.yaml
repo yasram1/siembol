@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: siembol-config-editor-ui
-  namespace: siembol
 spec:
   template:
     spec:
@@ -10,4 +9,4 @@ spec:
       - name: siembol-config-editor-ui
         env:
         - name: TEST_ENV_VARIABLE
-          value: "This-is-working"
+          value: "This-is-working-DEVELOPMENT"
