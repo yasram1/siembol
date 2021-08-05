@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: siembol-config-editor-rest
+  labels:
+    app: siembol-config-editor-rest
   namespace: siembol
 spec:
   replicas: 2
@@ -9,7 +11,7 @@ spec:
     metadata:
       labels:
         app: siembol-config-editor-rest
-        appId: 0000
+        appId: "0000"
     spec:
       containers:
       - name: siembol-config-editor-rest

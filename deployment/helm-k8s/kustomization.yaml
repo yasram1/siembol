@@ -1,6 +1,5 @@
 resources:
   - manifest.yaml
-namespace: siembol
 patchesStrategicMerge:
 - patches/ui_deploy_patch.yaml
 - patches/rest_deploy_patch.yaml
